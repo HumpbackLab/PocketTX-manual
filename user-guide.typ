@@ -138,7 +138,7 @@
     #text(11pt, gray)[面向零基础用户的轻量级航模遥控解决方案]
   ]
   
-  #placeholder("产品外观全景图", height: 15em)#todo[这里需要有外壳的整体产品图，包括后面的图也可以再修改]
+  #placeholder("产品外观示意图", img_path: "assets/1.png", height: 15em)
   
   #v(1fr)
   #text(10pt, gray)[文档版本：v1.0 | 最后更新：2026年1月26日] \
@@ -173,7 +173,7 @@
 
 = 硬件概览 <hardware>
 
-#placeholder("硬件接口与按键分布标注图", img_path: "assert/2.png")
+#placeholder("硬件接口与按键分布标注图", img_path: "assets/2.png")
 
 == 详细接口说明
 1. *Type-C 公头*
@@ -181,14 +181,14 @@
 
 2. *充电接口 (MH1.25)*
    - 位于设备侧面。您可以在此处接入 1S 锂电池进行充电。虽然接口支持快插，但请在插入前仔细确认电池正负极。
-#placeholder("电池接口连接示意图", img_path: "assert/3.png")
+#placeholder("电池接口连接示意图", img_path: "assets/3.png")
 3. *内置 ELRS 天线*
    - 射频信号通过内部天线发射。使用时请尽量避免用手紧握设备的天线位置，以免遮挡信号导致遥控距离缩短。
    - 天线位于设备末端（无充电口一侧）
 
 == 指示灯状态逻辑表
 设备顶部设有两枚多色指示灯，分别反馈系统与充电状态：
-#placeholder("指示灯分布示意图", img_path: "assert/4.png")
+#placeholder("指示灯分布示意图", img_path: "assets/4.png")
 #table(
   columns: (1fr, 1.5fr, 2fr),
   inset: 8pt,
@@ -231,12 +231,12 @@
 2. 安装时，手机可能会提示“未知来源风险”，请选择“允许安装”。
 
 == 第二步：物理互联流程
-#placeholder("手机与转换器连接示意图", height: 12em, img_path: "assert/5.png")
+#placeholder("手机与转换器连接示意图", height: 12em, img_path: "assets/5.png")
 
 将转换器插入手机。如果您的手机预先下载安装了官方的App，这里会弹出相关的提示，引导您打开Let's Fly App。
 
 == 第三步：操控配置与校准
-#placeholder("Let's Fly app 界面布局图", height: 12em, img_path: "assert/6.png")
+#placeholder("Let's Fly app 界面布局图", height: 12em, img_path: "assets/6.png")
 
 1. *建立连接*：点击界面上的 *Connect* 按钮。如果设备已正确插入且权限已授予，应用将通过USB接口向设备进行通信。连接成功后，系统工作灯将进入呼吸闪烁状态。
 
@@ -281,7 +281,7 @@ ExpressLRS 采用了现代的动态对频机制。只要在发射端（本设备
 3. *连接热点*：使用您的电脑或手机连接该热点，默认密码为 `expresslrs`。
 4. *访问后台*：打开浏览器，在地址栏输入 `10.0.0.1` 即可进入管理后台。
 
-#placeholder("ELRS 配置后台界面截图", img_path: "assert/7.png")
+#placeholder("ELRS 配置后台界面截图", img_path: "assets/7.png")
 
 = 固件升级与维护 <firmware>
 
@@ -300,7 +300,7 @@ ExpressLRS 采用了现代的动态对频机制。只要在发射端（本设备
 方式 2需要用户具备一定的软硬件基础知识，主要适用于*高级用户开发调试或需要深度定制功能*的场景。]
 \
 == 烧录方式1：使用WiFi配置页在线烧录 (推荐)
-#placeholder("WiFi配置页在线烧录固件示意图", img_path: "assert/8.png")
+#placeholder("WiFi配置页在线烧录固件示意图", img_path: "assets/8.png")
 
 参考@wificonf 的内容，进入WiFi配置页面。
 
