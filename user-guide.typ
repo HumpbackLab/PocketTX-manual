@@ -1,7 +1,7 @@
 #import "@preview/dashy-todo:0.0.3": todo
 
 #set text(
-  font: ("Segoe UI", "Microsoft YaHei"),
+  font: ("Noto Sans", "Source Han Sans SC", "Microsoft YaHei"),
   size: 11pt,
   lang: "zh",
   region: "cn",
@@ -54,14 +54,88 @@
   caption: caption,
 )
 
+#let trimmed-image = (path, trim: (:), alt: none) => context {
+  let img = image(path)
+  // Get dimensions of the source image
+  let dims = measure(img)
+
+  layout(size => {
+    let left = trim.at("left", default: 0.0%)
+    let right = trim.at("right", default: 0.0%)
+
+    let top = trim.at("top", default: 0.0%)
+    let bottom = trim.at("bottom", default: 0.0%)
+
+    let width-rel-trimmed = 100.0% - left - right
+    let height-rel-trimmed = 100.0% - top - bottom
+
+    let width-source-trimmed = dims.width * width-rel-trimmed
+    let height-source-trimmed = dims.height * height-rel-trimmed
+
+    // Aspect ratio h/w of the layout (available space)
+    let aspect-height-layout = size.height / size.width
+    // Aspect ratio h/w of the trimmed image
+    let aspect-height-trimmed = height-source-trimmed / width-source-trimmed
+
+    let width-final-trimmed = none
+    let height-final-trimmed = none
+
+    // Compute final size of trimmed image 
+    // by expanding along dimension that first hits the layout constraints
+    if aspect-height-layout >= aspect-height-trimmed {
+      // Expand width of image
+      width-final-trimmed = size.width
+      height-final-trimmed = aspect-height-trimmed * width-final-trimmed
+    } else {
+      // Expand height of image
+      height-final-trimmed = size.height
+      width-final-trimmed = size.height / aspect-height-trimmed
+    }
+
+    // Compute the hypothetical size of the image without trimming
+    let width-final-untrimmed = width-final-trimmed / float(width-rel-trimmed)
+    let height-final-untrimmed = height-final-trimmed / float(height-rel-trimmed)
+
+    box(
+        clip: true,
+        inset: (
+            top: -(top * height-final-untrimmed),
+            bottom: -(bottom * height-final-untrimmed),
+            left: -(left * width-final-untrimmed),
+            right: -(right * width-final-untrimmed)
+          ),
+      // TODO: Handle explicit sizing according to a parameter (e.g. don't scale over DPI limits)
+        image(path, width: width-final-untrimmed, height: height-final-untrimmed, alt: alt)
+      )
+  })
+}
+
+#let caution(body) = block(
+  fill: rgb("#fff5f5"),
+  stroke: (left: 4pt + red),
+  inset: 12pt,
+  radius: 4pt,
+  width: 100%,
+  [*注意：* #body],
+)
+
+#let tip(body) = block(
+  fill: rgb("#f0f8ff"),
+  stroke: (left: 4pt + blue),
+  inset: 12pt,
+  radius: 4pt,
+  width: 100%,
+  [*提示：* #body],
+)
+
 // 封面
 #align(center + horizon)[
   #block(inset: 3em)[
     #text(28pt, weight: "bold", fill: navy)[Android-ELRS]#todo[other name?] \
-    #v(0.8em)
+    #v(0.4em)
     #text(18pt, weight: "medium")[用户使用手册] \
-    #v(1.5em)
-    #text(12pt, gray)[面向零基础用户的轻量级航模遥控解决方案]
+    #v(1.2em)
+    #text(11pt, gray)[面向零基础用户的轻量级航模遥控解决方案]
   ]
   
   #placeholder("产品外观全景图", height: 15em)#todo[这里需要有外壳的整体产品图，包括后面的图也可以再修改]
@@ -185,8 +259,8 @@
 
 = 配置、对频与 Web UI <configuration>
 #v(0.5em)
-#box(stroke: 1pt + red, inset: 12pt, fill: rgb("#fff5f5"), radius: 4pt, width: 100%)[
-  🛑 修改 ExpressLRS 核心参数（如发射功率、包速率等）可能会直接导致信号链路中断、控制距离缩减甚至发生严重失控。\
+#caution[
+  修改 ExpressLRS 核心参数（如发射功率、包速率等）可能会直接导致信号链路中断、控制距离缩减甚至发生严重失控。\
   请仅在充分理解相关参数含义、并处于合规无线电环境下进行调整，在专业人士的指导下进行配置。\
   由于配置不当导致的设备损毁或人身财产损失，由用户承担全部责任。]
 ==  对频密码 (Binding Phrase)
@@ -194,7 +268,7 @@ ExpressLRS 采用了现代的动态对频机制。只要在发射端（本设备
 如果您需要调整对频密码，可以通过下述的WiFI配置管理页面进行。
 
 #v(0.5em)
-#box(stroke: 1pt + blue, inset: 12pt, fill: rgb("#f0f8ff"), radius: 4pt, width: 100%)[
+#tip[
   *关于接收机 (Receiver)*：
   请确保您的飞机接收机也已配置了*完全一致*的对频密码。
   - 如果您使用的是我们的套装接收机，密码已预设好，无需操作。
@@ -221,7 +295,7 @@ ExpressLRS 采用了现代的动态对频机制。只要在发射端（本设备
   3. 建议用户在专业人士指导下进行
 ]\
 #v(0.5em)
-#box(stroke: 1pt + blue, inset: 12pt, fill: rgb("#f0f8ff"), radius: 4pt, width: 100%)[
+#tip[
 我们提供了以下两种固件更新方式。对于大多数用户，我们*强烈推荐*使用*方式 1（WiFi 配置页）*进行升级，该方式最为便捷且风险较低。
 方式 2需要用户具备一定的软硬件基础知识，主要适用于*高级用户开发调试或需要深度定制功能*的场景。]
 \
@@ -233,7 +307,7 @@ ExpressLRS 采用了现代的动态对频机制。只要在发射端（本设备
 在页面中选择上传选项，随后上传想要烧录的固件，点击蓝色的上传按钮，等待烧录完成，设备会自动进行重启。
 == 烧录方式2：进入引导模式 (Bootloader)
 #v(0.5em)
-#box(stroke: 1pt + red, inset: 12pt, fill: rgb("#fff5f5"), radius: 4pt, width: 100%)[
+#caution[
   *严格操作顺序*：
   1. 确认设备*未连接*任何电源或手机，处于未通电状态。
   2. 使用回形针或 SIM 卡顶针，对准并*按住*设备机身上的 *Boot 键*（通常位于外壳小孔内部）。
