@@ -1,8 +1,8 @@
-# Android-ELRS-manual
+# PocketTX-manual
 
 Power your RC flights with your phone. A smart adapter converting Android devices to ExpressLRS protocol.
 
-This repository contains the source code for the Android-ELRS user manual, written in [Typst](https://typst.app/).
+This repository contains the source code for the PocketTX user manual, written in [Typst](https://typst.app/).
 
 ## Project Structure
 

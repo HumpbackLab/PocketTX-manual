@@ -17,7 +17,7 @@
       #set text(8pt, gray)
       #grid(
         columns: (1fr, 1fr),
-        [Android-ELRS 用户手册],
+        [PocketTX 用户手册],
         align(right)[版本: v1.0]
       )
       #v(-0.5em)
@@ -131,7 +131,7 @@
 // 封面
 #align(center + horizon)[
   #block(inset: 3em)[
-    #text(28pt, weight: "bold", fill: navy)[Android-ELRS]#todo[other name?] \
+    #text(28pt, weight: "bold", fill: navy)[PocketTX] \
     #v(0.4em)
     #text(18pt, weight: "medium")[用户使用手册] \
     #v(1.2em)
@@ -142,7 +142,7 @@
   
   #v(1fr)
   #text(10pt, gray)[文档版本：v1.0 | 最后更新：2026年1月26日] \
-  #text(10pt, gray)[适用硬件：Android-ELRS v1.0 及以上]
+  #text(10pt, gray)[适用硬件：PocketTX v1.0 及以上]
 ]
 
 #pagebreak()
@@ -154,8 +154,8 @@
 
 = 产品简介 <intro>
 
-== 什么是 Android-ELRS 转换器？
-在传统的航模运动中，操控无人机或固定翼飞机通常依赖体积庞大、价格不菲的专用遥控器。*Android-ELRS 转换器* 的出现彻底改变了这一现状。它是一款能够将您的安卓手机瞬间转化为“专业级遥控发射机”的智能硬件。
+== 什么是 PocketTX 转换器？
+在传统的航模运动中，操控无人机或固定翼飞机通常依赖体积庞大、价格不菲的专用遥控器。*PocketTX 转换器* 的出现彻底改变了这一现状。它是一款能够将您的安卓手机瞬间转化为“专业级遥控发射机”的智能硬件。
 
 这款设备通过手机的 Type-C 接口接收来自 APP 的高频操控指令，再由内部的精密电路将其转换为符合航模工业标准的 *Crossfire (CRSF)* 协议信号，最后通过高性能的 ExpressLRS 无线模块发射出去。这意味着，只要有一台安卓手机，您就能体验到低延迟、长距离的专业遥控乐趣。
 
@@ -167,7 +167,7 @@
 
 == 包装清单
 #placeholder("内容物清单展示图")
-1. *Android-ELRS 转换器主机*：核心设备，集成了 USB 转换、ELRS 发射与充电功能。
+1. *PocketTX 转换器主机*：核心设备，集成了 USB 转换、ELRS 发射与充电功能。
 2. *Type-C 保护盖*：用于保护公头接口免受灰尘或撞击损伤。
 3. *快速使用卡片*：包含本手册的下载二维码或关键提示。
 
@@ -227,7 +227,7 @@
 
 == 第一步：软件环境准备
 由于 Android 系统的多样性，我们建议您按照以下步骤准备：
-1. 从官方渠道下载 *Android-ELRS 控制 APP* 的 APK 文件。您可以通过网站http://placeholder.com #todo[这里需要换成真正的发布网址]下载此应用。
+1. 从官方渠道下载 *PocketTX 控制 APP* 的 APK 文件。您可以通过网站http://placeholder.com #todo[这里需要换成真正的发布网址]下载此应用。
 2. 安装时，手机可能会提示“未知来源风险”，请选择“允许安装”。
 
 == 第二步：物理互联流程
