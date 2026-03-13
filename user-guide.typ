@@ -141,8 +141,8 @@
   #placeholder("产品外观示意图", img_path: "assets/1.png", height: 15em)
   
   #v(1fr)
-  #text(10pt, gray)[文档版本：v1.0 | 最后更新：2026年1月26日] \
-  #text(10pt, gray)[适用硬件：PocketTX v1.0 及以上]
+  #text(10pt, gray)[文档版本：v1.0.0 | 最后更新：2026年3月13日] \
+  #text(10pt, gray)[适用硬件：PocketTX v1.0.0 及以上]
 ]
 
 #pagebreak()
@@ -154,16 +154,16 @@
 
 = 产品简介 <intro>
 
-== 什么是 PocketTX 转换器？
-在传统的航模运动中，操控无人机或固定翼飞机通常依赖体积庞大、价格不菲的专用遥控器。*PocketTX 转换器* 的出现彻底改变了这一现状。它是一款能够将您的安卓手机瞬间转化为“专业级遥控发射机”的智能硬件。
+== 什么是 PocketTX？
+*PocketTX *是一款将安卓手机控制信号转换为 ELRS 发射信号的小型外设。
 
-这款设备通过手机的 Type-C 接口接收来自 APP 的高频操控指令，再由内部的精密电路将其转换为符合航模工业标准的 *Crossfire (CRSF)* 协议信号，最后通过高性能的 ExpressLRS 无线模块发射出去。这意味着，只要有一台安卓手机，您就能体验到低延迟、长距离的专业遥控乐趣。
+设备通过手机 Type-C 接口接收 APP 输出的控制数据，在内部转换为 *Crossfire (CRSF)* 协议，再由内置 ELRS 发射端发送给接收机。它的主要用途是让用户在便携场景下完成基础飞行控制与调试。
 
 == 核心技术亮点
-- 工业级串口转换芯片，确保手机与射频模块之间的串行通讯稳定如磐，无丢包风险。
-- 基于著名的 ExpressLRS (ELRS) 开源项目，内置高性能处理芯片。ELRS 是目前航模界最先进的无线协议之一，以超高的刷新率和极强的抗干扰能力著称。
-- 设备直接从手机 Type-C 接口获取电力，无需外接笨重的动力电池即可驱动射频工作，真正做到即插即用。
-- 除了作为发射机，它还集成了一套专用于 1s 航模电池的充电系统，可以为常见的 1S 飞控电池提供高达 500mA 的恒流充电。
+- 采用 USB 串口桥接方案，实现手机与射频模块之间的数据通信。
+- 基于 ExpressLRS (ELRS) 架构实现发射功能，支持常见 ELRS 接收机链路。
+- 设备由手机 Type-C 接口供电，无需额外发射电池。
+- 集成 1S 电池充电电路，典型充电电流约 500mA。
 
 = 硬件概览 <hardware>
 
@@ -195,26 +195,23 @@
     *(红色)*
   ],
   [常亮],
-  [进入烧录模式或固件运行异常],
+  [已连接飞控，链路正常],
 
   [缓慢闪烁],
-  [未连接（正在等待对频）],
+  [配对中（未连接到飞控）],
 
   [快速闪烁],
   [进入 WiFi 配置模式],
 
-  [呼吸闪烁],
-  [已成功连接（链接成功，正常操控）],
+  [常灭],
+  [进入烧录（Boot）模式],
 
-  table.cell(rowspan: 3)[*充电指示灯*],
+  table.cell(rowspan: 2)[*充电指示灯*],
   [红色常亮],
   [正在充电 (CHG)],
 
-  [老批次：绿色常亮],
-  [已充满或处于待机状态 (STB)。老批次有绿色充满灯属于正常现象。],
-
-  [新批次：无绿色灯],
-  [新批次未配备绿色充满灯，属于正常现象。],
+  [绿色常亮],
+  [已充满或处于待机状态 (STB)],
 )
 
 == Boot 按钮
@@ -224,15 +221,16 @@
 
 == 第一步：软件环境准备
 由于 Android 系统的多样性，我们建议您按照以下步骤准备：
-1. 从官方渠道下载固件 BIN：#link("https://github.com/HumpbackLab/PocketTX-manual/releases/latest/download/PocketTX-2.4-V1.0-firmware-OTA.bin")[PocketTX-2.4-V1.0-firmware-OTA.bin]
+1. 从官方渠道下载PocketTX专用的App（Let's Fly)，并安装到您的手机上。
+App下载地址：#link("https://github.com/HumpbackLab/LetsFly/releases")[https://github.com/HumpbackLab/LetsFly/releases]
+
+
 2. 安装时，手机可能会提示“未知来源风险”，请选择“允许安装”。
 
 == 第二步：物理互联流程
 #placeholder("手机与转换器连接示意图", height: 12em, img_path: "assets/5.png")
 
 将转换器插入手机。如果您的手机预先下载安装了官方的App（Let's Fly)，这里会弹出相关的提示，引导您打开Let's Fly App。
-
-App下载地址：#link("https://github.com/HumpbackLab/LetsFly/releases")[https://github.com/HumpbackLab/LetsFly/releases]
 
 == 第三步：操控配置与校准
 #placeholder("Let's Fly app 界面布局图", height: 12em, img_path: "assets/6.png")
@@ -276,9 +274,8 @@ ExpressLRS 采用了现代的动态对频机制。只要在发射端（本设备
 
 == 如何进入 WiFi 配置管理页面<wificonf>
 1. *进入方式*：将本设备插入手机并供电，静置约 60 秒不要进行任何操控，设备会自动发射出一个名为 `ExpressLRS TX` 的热点。
-2. *手动强制进入*：连续开关机（拔插）3 次，第 4 次上电时会强制进入 WiFi 模式。
-3. *连接热点*：使用您的电脑或手机连接该热点，默认密码为 `expresslrs`。
-4. *访问后台*：打开浏览器，在地址栏输入 `10.0.0.1` 即可进入管理后台。
+2. *连接热点*：使用您的电脑或手机连接该热点，默认密码为 `expresslrs`。
+3. *访问后台*：打开浏览器，在地址栏输入 `10.0.0.1` 即可进入管理后台。
 
 #placeholder("ELRS 配置后台界面截图", img_path: "assets/7.png")
 
@@ -344,7 +341,7 @@ PocketTX固件更新地址：
 == 充电操作规范
 1. *连接电源*：将转换器插入手机。建议此时保证手机电量充足。
 2. *插入电池*：观察极性，插入与充电接口匹配的电池。
-3. *观察指示灯*：充电中为红灯常亮。老批次充满后会亮绿色；新批次无绿色充满灯，属于正常现象。
+3. *观察指示灯*：充电中为红灯常亮；充满或待机状态为绿色常亮。
 4. *充满移除*：建议结合充电时间与电池电压判断充满状态，确认后即可拔出。
 
 == 安全事项 (请务必阅读)
@@ -365,3 +362,16 @@ PocketTX固件更新地址：
 1. *合规性声明*：使用本产品前，请务必了解您所在国家/地区关于 2.4GHz 无线电发射的相关法律。
 2. *操作责任*：航模运动具有一定危险性。由于 APP 虚拟摇杆不同于真实物理摇杆，初期练习请务必在空旷场地进行。
 3. *损毁免责*：本公司不对因操作不当、固件刷写失败或充电违规导致的手机、电池或飞机的损坏承担法律责任。
+
+= 附录：原理图 <schematic-appendix>
+
+以下为 PocketTX 当前版本原理图：
+
+#figure(
+  image("schematic/PocketTX_Schematic_2026-03-13.pdf", page: 1, width: 100%),
+  caption: [PocketTX 原理图（第 1 页）],
+)
+
+以上原理图也可以在以下链接下载查看：
+- #link("https://github.com/HumpbackLab/PocketTX-manual/releases/latest/")[https://github.com/HumpbackLab/PocketTX-manual/releases/latest/] 
+- release -> Assets -> PocketTX_Schematic_2026-03-13.pdf
