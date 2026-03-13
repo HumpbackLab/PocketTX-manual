@@ -1,5 +1,11 @@
 .vscode
 .idea
 .cursor
+# Ignore generated PDFs by default.
 *.pdf
+# Keep schematic PDFs under schematic tracked.
+!schematic/
+!schematic/*.pdf
+!schematic/**/*.pdf
 *.zip
+BOM
