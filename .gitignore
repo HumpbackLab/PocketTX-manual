@@ -9,3 +9,4 @@
 !schematic/**/*.pdf
 *.zip
 BOM
+*.bin

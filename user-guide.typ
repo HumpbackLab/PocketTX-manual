@@ -304,6 +304,9 @@ ExpressLRS 采用了现代的动态对频机制。只要在发射端（本设备
 参考@wificonf 的内容，进入WiFi配置页面。
 
 在页面中选择上传选项，随后上传想要烧录的固件，点击蓝色的上传按钮，等待烧录完成，设备会自动进行重启。
+
+PocketTX固件更新地址：
+- #link("https://github.com/HumpbackLab/PocketTX-manual/releases/latest")[https://github.com/HumpbackLab/PocketTX-manual/releases/latest]
 == 烧录方式2：进入引导模式 (Bootloader)
 #v(0.5em)
 #caution[
