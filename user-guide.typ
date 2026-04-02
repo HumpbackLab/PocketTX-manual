@@ -18,7 +18,7 @@
       #grid(
         columns: (1fr, 1fr),
         [PocketTX 用户手册],
-        align(right)[版本: v1.0]
+        align(right)[版本: v1.1]
       )
       #v(-0.5em)
       #line(length: 100%, stroke: 0.5pt + gray)
@@ -141,7 +141,7 @@
   #placeholder("产品外观示意图", img_path: "assets/1.png", height: 15em)
   
   #v(1fr)
-  #text(10pt, gray)[文档版本：v1.0.0 | 最后更新：2026年3月13日] \
+  #text(10pt, gray)[文档版本：v1.1.0 | 最后更新：2026年4月2日] \
   #text(10pt, gray)[适用硬件：PocketTX v1.0.0 及以上]
 ]
 
