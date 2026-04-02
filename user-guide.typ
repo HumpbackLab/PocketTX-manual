@@ -39,9 +39,9 @@
 #show outline.entry: set par(leading: 1.2em)
 
 // 辅助函数：绘制占位/实物图
-#let placeholder(caption, img_path: none, height: 10em) = figure(
+#let placeholder(caption, img_path: none, height: 10em, width: 100%) = figure(
   if img_path != none {
-    image(img_path, width: 100%)
+    image(img_path, width: width)
   } else {
     rect(width: 100%, height: height, stroke: 1pt + navy, fill: luma(250), radius: 4pt)[
       #align(center + horizon)[
@@ -233,26 +233,24 @@ App下载地址：#link("https://github.com/HumpbackLab/LetsFly/releases")[https
 将转换器插入手机。如果您的手机预先下载安装了官方的App（Let's Fly)，这里会弹出相关的提示，引导您打开Let's Fly App。
 
 == 第三步：操控配置与校准
-#placeholder("Let's Fly app 界面布局图", height: 12em, img_path: "assets/6.png")
+#placeholder("Let's Fly app 界面布局图", img_path: "assets/6.png", width: 60%)
 
 1. *建立连接*：点击界面上的 *Connect* 按钮。如果设备已正确插入且权限已授予，应用将通过USB接口向设备进行通信。连接成功后，系统工作灯将进入呼吸闪烁状态。
 
 2. *遥控布局*：
-   - *左摇杆*：垂直方向控制 *油门 (Throttle)*，水平方向控制 *偏航 (Yaw)*。
-   - *右摇杆*：垂直方向控制 *俯仰 (Pitch)*，水平方向控制 *横滚 (Roll)*。
+   - *单手模式*：仅使用单摇杆控制，垂直方向为 *油门 (Throttle)*，水平方向为 *偏航 (Yaw)*，适合简单飞行或初学者入门。
+   - *双手模式*：类似游戏手柄的双摇杆布局：
+     - *左摇杆*：垂直方向控制 *油门 (Throttle)*，水平方向控制 *偏航 (Yaw)*。
+     - *右摇杆*：垂直方向控制 *俯仰 (Pitch)*，水平方向控制 *横滚 (Roll)*。
    - 默认情况下，油门摇杆不回中，保持在您放置的位置。
+   - 设置页面中，可以调整各个摇杆的灵敏度，以适应不同飞行风格和飞机特性。
 
-3. *功能开关*：
-   - *Arm 开关*：控制通道 5 (Aux 1)。将其拨至开启状态可*解锁电机*。注意：解锁时需确保油门处于最低位以防飞机突然起跳。
-  - *Manual 开关*：控制通道 8 (Aux 4)。该开关仅改变发射端输出的 CRSF 通道值，最终触发的具体飞行行为由飞控端的通道映射与模式配置决定。
-
-4. *体感控制模式 (Gyro Mode)*：
-   - 点击 *Use Gyro* 按钮切换至体感操控。
-   - 在此模式下，您可以通过倾斜手机来控制飞机的俯仰与横滚。
+3. *体感控制模式 (Gyro Mode)*：
+   - 在双手模式下，在设置页面中，可以切换至体感操控。在此模式下，您可以通过倾斜手机来控制飞机的俯仰与横滚。
    - *油门控制*：由于手机倾斜无法精确控制油门，体感模式下需使用手机侧面的 *音量键* 来增减油门读数。
    - *安全自动锁*：当您的手机倾斜角度过大（例如完全翻转或竖立）时，App 会自动关闭 Arm 开关实现紧急停机，保护人员安全。
-5. *调试信息显示*
-  - 在 APP 界面中可以查看当前的实时 CRSF 通道数值（典型范围：172-1811），并可同时查看手机姿态相关调试信息（如 roll、pitch、yaw），便于联调与状态确认。
+4. *调试信息显示*
+  - 在设置中可以打开调试开关，从而可以查看当前的实时 CRSF 通道数值（典型范围：172-1811），并可同时查看手机姿态相关调试信息（如 roll、pitch、yaw），便于联调与状态确认。
 
 = 配置、对频与 Web UI <configuration>
 #v(0.5em)
